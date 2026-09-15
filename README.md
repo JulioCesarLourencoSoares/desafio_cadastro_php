@@ -1,12 +1,36 @@
 # desafio_cadastro_php
 Atividade 3: Desafio "Verificação de Maioridade
 
-Sistema de Validação de Acesso e Registro em PHPAplicação web desenvolvida em página única (Single-Page App) utilizando PHP e HTML5. O sistema calcula a idade do usuário a partir do ano de nascimento informado, decide sobre a concessão de acesso com base na maioridade e persiste os registros aprovados em um arquivo de log local (log_acessos.txt).📌 ÍndiceVisão GeralFuncionalidadesTecnologias UtilizadasFluxo de FuncionamentoPré-requisitosInstalação e ExecuçãoEstrutura do ProjetoFormato do Arquivo de LogBoas Práticas e SegurançaMelhorias FuturasLicença🔎 Visão GeralEste projeto foi construído com o objetivo de demonstrar a manipulação de dados em formulários HTTP (método POST), processamento de datas no servidor com as funções nativas do PHP, controle de fluxo condicional e escrita contínua em arquivos de texto no servidor (file stream em modo append).✨ FuncionalidadesFormulário Dinâmico: Captura o nome do usuário e valida o ano de nascimento diretamente no navegador.Cálculo Automático de Idade: Determina a idade exata em tempo de execução com base no ano atual retornado pela função date('Y').Validação de Regra de Negócio:Acesso Permitido ($\ge 18$ anos): Exibe mensagem de boas-vindas e grava o registro no arquivo de log.Acesso Negado ($< 18$ anos): Exibe alerta visual de restrição sem alterar os arquivos de auditoria.Auditoria / Log Automatizado: Grava o nome, a idade e o timestamp preciso da tentativa de acesso em modo append (preservando o histórico sem sobrescrever registros antigos).Sanitização de Dados: Prevenção contra ataques básicos de Cross-Site Scripting (XSS).🛠️ Tecnologias UtilizadasPHP 7.4+: Processamento no servidor, regras de negócio e manipulação do sistema de arquivos.HTML5: Estruturação do formulário e validações nativas de interface.⚙️ Fluxo de FuncionamentoEntrada de Dados: O usuário preenche os campos Nome e Ano de Nascimento.Envio da Requisição: Os dados são submetidos via método POST para o próprio arquivo (index.php).Processamento no Servidor:O PHP higieniza o texto do nome.O ano de nascimento é convertido para um número inteiro e subtraído do ano corrente do sistema.Decisão e Resposta:Maior de Idade: Exibe mensagem em destaque verde, abre o arquivo log_acessos.txt, adiciona a nova linha e fecha o arquivo.Menor de Idade: Exibe mensagem de bloqueio em vermelho.📋 Pré-requisitosPara rodar esta aplicação localmente, você precisará de:PHP (versão 7.4 ou superior) configurado nas variáveis de ambiente, OUUm ambiente de desenvolvimento local pré-configurado, como:XAMPPLaragonWampServer🚀 Instalação e ExecuçãoOpção 1: Servidor Embutido do PHP (Recomendado)Faça o download ou clone este repositório.Abra o terminal na pasta raiz onde se encontra o arquivo index.php.Inicie o servidor interno do PHP executando:Bashphp -S localhost:8000
-Abra seu navegador e acesse: http://localhost:8000Opção 2: Servidor Apache (XAMPP / Laragon)Copie a pasta do projeto para o diretório raiz do seu servidor local:XAMPP: C:/xampp/htdocs/verificacao-acessoLaragon: C:/laragon/www/verificacao-acessoCertifique-se de que o serviço do Apache está em execução.Acesse no navegador: http://localhost/verificacao-acesso📂 Estrutura do ProjetoPlaintextverificacao-acesso/
-│
-├── index.php           # Aplicação principal (HTML + PHP)
-├── log_acessos.txt     # Gerado automaticamente ao registrar o primeiro acesso permitido
-└── README.md           # Documentação do repositório
-📄 Formato do Arquivo de Log (log_acessos.txt)Cada usuário aprovado gera um registro formatado no arquivo contendo data e hora da tentativa:PlaintextNome: Maria Silva | Idade: 22 anos | Data: 15/09/2026 14:30:10
-Nome: Carlos Eduardo | Idade: 35 anos | Data: 15/09/2026 15:05:42
-🔒 Boas Práticas Aplicadashtmlspecialchars(): Tratamento contra injeção de scripts (XSS) ao exibir dados inseridos pelo usuário diretamente no HTML.Type Casting (int): Garantia de tipagem numérica para a variável do ano de nascimento antes do cálculo aritmético.Limites Dinâmicos no Front-End: O campo <input type="number"> possui atributo max alimentado dinamicamente com o ano atual pelo PHP (max="<?php echo date('Y'); ?>").💡 Melhorias Futuras[ ] Aplicar estilização CSS moderna com Bootstrap 5 ou Tailwind CSS.[ ] Substituir a persistência em arquivo TXT por um banco de dados relacional (MySQL / PostgreSQL) via PDO.[ ] Evoluir o cálculo da idade permitindo a entrada da data completa de nascimento (dia, mês e ano).[ ] Criar uma área administrativa para visualização e exportação dos relatórios de log.📜 LicençaEste projeto é de uso livre para fins acadêmicos e de aprendizado, distribuído sob a licença MIT.
+# 🛡️ Sistema de Verificação de Acesso em PHP
+
+Aplicação web simples desenvolvida em PHP que valida a idade do usuário com base no ano de nascimento e registra os acessos autorizados em um arquivo de log local.
+
+---
+
+## 🚀 Funcionalidades
+
+- **Coleta de Dados:** Formulário simples para entrada de nome e ano de nascimento.
+- **Cálculo de Idade:** Processamento automático no servidor com base no ano atual do sistema.
+- **Validação de Maioridade:**
+  - **≥ 18 anos:** Exibe mensagem de confirmação e grava o log de acesso.
+  - **< 18 anos:** Exibe mensagem de acesso negado.
+- **Armazenamento em Arquivo:** Salva o histórico de usuários autorizados no arquivo `log_acessos.txt`.
+
+---
+
+## 🛠️ Pré-requisitos
+
+- **PHP 7.4** ou superior instalado na máquina.
+- Servidor local (XAMPP, Laragon, WampServer) **ou** uso do servidor embutido do próprio PHP.
+
+---
+
+## 🔧 Como Executar o Projeto
+
+1. **Baixe ou clone o código:**
+   Certifique-se de salvar o código principal como `index.php`.
+
+2. **Inicie o servidor embutido do PHP:**
+   Abra o terminal na pasta onde está o arquivo `index.php` e rode:
+   ```bash
+   php -S localhost:8000
